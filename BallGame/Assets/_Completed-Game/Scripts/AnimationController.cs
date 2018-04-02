@@ -12,9 +12,20 @@ public class AnimationController : MonoBehaviour {
     {
         optionsMenu.Play("options");
     }
+    public void playAnimationReverse()
+    {
+
+        optionsMenu.SetTrigger("rev");
+    }
 
     public void MainMenu()
     {
+        mainMenu.SetTrigger("rev");
+    }
+
+    public void MainMenuRev()
+    {
+        
         mainMenu.Play("menu");
     }
 }
