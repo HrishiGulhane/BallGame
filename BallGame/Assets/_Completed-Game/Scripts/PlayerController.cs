@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 	public Text countText;
 	public Text winText;
     Vector3 originalPos;
+   
+ 
  
 
 	// Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         originalPos = gameObject.transform.position;
+        
     }
 
     // At the start of the game..
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour {
 		}
         else if (other.gameObject.tag == "Reset")
         {
+            ResetBoxes();
             rb.velocity=Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             print("raawas");
@@ -129,5 +133,14 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    public void ResetBoxes()
+    {
+        /*GameObject[] boxes = GameObject.FindGameObjectsWithTag("Pick Up");
+        foreach (GameObject go in boxes)
+        {
+            go.SetActive(true);
+        }*/
+       
+    }
 
 }
