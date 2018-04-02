@@ -85,13 +85,25 @@ public class PlayerController : MonoBehaviour {
     public void MovementLeft()
     {
        print("Left");
-        rb.AddForce(-(transform.right * speed));
+        rb.AddForce((Vector3.left * speed));
 
     }
     public void MovementRight()
     {
         print("Right");
-        rb.AddForce(transform.right * speed);
+        rb.AddForce(Vector3.right * speed);
+
+    }
+    public void MovementUp()
+    {
+        print("Up");
+        rb.AddForce(Vector3.forward * speed);
+
+    }
+    public void MovementDown()
+    {
+        print("Right");
+        rb.AddForce(Vector3.back * speed);
 
     }
 }
