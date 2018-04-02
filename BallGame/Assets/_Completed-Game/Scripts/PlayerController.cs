@@ -11,14 +11,20 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public Text countText;
 	public Text winText;
+    Vector3 originalPos;
  
 
 	// Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
 	private Rigidbody rb;
 	private int count;
 
-	// At the start of the game..
-	void Start ()
+    void Awake()
+    {
+        originalPos = gameObject.transform.position;
+    }
+
+    // At the start of the game..
+    void Start ()
 	{
         
 		// Assign the Rigidbody component to our private rb variable
@@ -66,7 +72,15 @@ public class PlayerController : MonoBehaviour {
 			// Run the 'SetCountText()' function (see below)
 			SetCountText ();
 		}
-	}
+        else if (other.gameObject.tag == "Reset")
+        {
+            rb.velocity=Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            print("raawas");
+            gameObject.transform.position = originalPos;
+            
+        }
+    }
 
 	// Create a standalone function that can update the 'countText' UI and check if the required amount to win has been achieved
 	void SetCountText()
@@ -106,4 +120,12 @@ public class PlayerController : MonoBehaviour {
         rb.AddForce(Vector3.back * speed);
 
     }
+    public void MovementJump()
+    {
+        print("Jump");
+        rb.AddForce(Vector3.up * 400);
+
+    }
+
+
 }
