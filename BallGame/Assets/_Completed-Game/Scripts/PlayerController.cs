@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public Text countText;
 	public Text winText;
+ 
 
 	// Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
 	private Rigidbody rb;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 	// At the start of the game..
 	void Start ()
 	{
+        
 		// Assign the Rigidbody component to our private rb variable
 		rb = GetComponent<Rigidbody>();
 
@@ -35,7 +37,8 @@ public class PlayerController : MonoBehaviour {
 	// Each physics step..
 	void FixedUpdate ()
 	{
-		// Set some local float variables equal to the value of our Horizontal and Vertical Inputs
+        
+		/*// Set some local float variables equal to the value of our Horizontal and Vertical Inputs
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 
@@ -44,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 
 		// Add a physical force to our Player rigidbody using our 'movement' Vector3 above, 
 		// multiplying it by 'speed' - our public player speed that appears in the inspector
-		rb.AddForce (movement * speed);
+		rb.AddForce (movement * speed);*/
 	}
 
 	// When this game object intersects a collider with 'is trigger' checked, 
@@ -78,4 +81,17 @@ public class PlayerController : MonoBehaviour {
 			winText.text = "You Win!";
 		}
 	}
+
+    public void MovementLeft()
+    {
+       print("Left");
+        rb.AddForce(-(transform.right * speed));
+
+    }
+    public void MovementRight()
+    {
+        print("Right");
+        rb.AddForce(transform.right * speed);
+
+    }
 }
