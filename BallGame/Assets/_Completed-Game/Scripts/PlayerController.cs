@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour {
             rb.angularVelocity = Vector3.zero;
             print("raawas");
             gameObject.transform.position = originalPos;
+            count = 0;
+            SetCountText();
             
         }
     }
@@ -116,7 +118,7 @@ public class PlayerController : MonoBehaviour {
     }
     public void MovementDown()
     {
-        print("Right");
+        print("Down");
         rb.AddForce(Vector3.back * speed);
 
     }
