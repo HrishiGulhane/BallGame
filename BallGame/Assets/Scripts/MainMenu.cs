@@ -6,8 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-	public void PlayGame()
+ 
+    public void PlayGame()
+    {
+        Invoke("SceneBoss", 0.7f);
+       
+    }
+     
+    public void SceneBoss()
     {
         SceneManager.LoadScene("Game");
     }
+   
+    
 }
