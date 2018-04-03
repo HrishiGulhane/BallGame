@@ -23,4 +23,5 @@ public class CameraController : MonoBehaviour {
 		// to the player's position, plus the offset amount
 		transform.position = player.transform.position + offset;
 	}
+    //is this backupshit working?
 }
