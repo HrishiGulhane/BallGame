@@ -32,7 +32,7 @@ public class AnimationController : MonoBehaviour {
 
     public void AboutMenu()
     {
-        aboutMenu.SetTrigger("rev");
+        aboutMenu.SetTrigger("revy");
     }
 
     public void AboutMenuRev()

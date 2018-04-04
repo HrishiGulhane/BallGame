@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Create public variables for player speed, and for the Text UI game objects
 	public float speed;
-	public Text countText;
+	
 	public Text winText;
     Vector3 originalPos;
     public PlayableDirector timeline;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
 	private Rigidbody rb;
-	private int count;
+	
 
     void Awake()
     {
@@ -35,13 +35,13 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 
 		// Set the count to zero 
-		count = 0;
+		
 
 		// Run the SetCountText function to update the UI (see below)
-		SetCountText ();
+		
 
 		// Set the text property of our Win Text UI to an empty string, making the 'You Win' (game over message) blank
-		winText.text = "";
+		winText.gameObject.SetActive(false);
 	}
 
 	// Each physics step..
@@ -72,8 +72,8 @@ public class PlayerController : MonoBehaviour {
             rb.angularVelocity = Vector3.zero;
             print("raawas");
             gameObject.transform.position = originalPos;
-            count = 0;
-            SetCountText();
+            
+            
             timeline.Stop();
 
         }
@@ -84,11 +84,12 @@ public class PlayerController : MonoBehaviour {
         }
         else if(other.gameObject.tag=="Win")
         {
+            winText.gameObject.SetActive(true);
             winText.text = "You Win!";
         }
     }
 
-	// Create a standalone function that can update the 'countText' UI and check if the required amount to win has been achieved
+	/*// Create a standalone function that can update the 'countText' UI and check if the required amount to win has been achieved
 	void SetCountText()
 	{
 		// Update the text field of our 'countText' variable
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 			// Set the text value of our 'winText'
 			winText.text = "You Win!";
 		}
-	}
+	}*/
 
     public void MovementLeft()
     {
