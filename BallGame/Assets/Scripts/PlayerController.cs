@@ -2,6 +2,7 @@
 
 // Include the namespace required to use Unity UI
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 using System.Collections;
 
@@ -12,7 +13,8 @@ public class PlayerController : MonoBehaviour {
 	public Text countText;
 	public Text winText;
     Vector3 originalPos;
-    public Light winTrigger;
+    public PlayableDirector timeline;
+    
    
  
  
@@ -90,7 +92,7 @@ public class PlayerController : MonoBehaviour {
         else if(other.gameObject.tag=="WinTrigger")
         {
             print("triggerwotrks");
-            winTrigger.enabled = true;
+            timeline.Play();
         }
     }
 
