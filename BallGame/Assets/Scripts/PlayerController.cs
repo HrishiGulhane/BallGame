@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 	public Text countText;
 	public Text winText;
     Vector3 originalPos;
+    public Light winTrigger;
    
  
  
@@ -85,6 +86,11 @@ public class PlayerController : MonoBehaviour {
             count = 0;
             SetCountText();
             
+        }
+        else if(other.gameObject.tag=="WinTrigger")
+        {
+            print("triggerwotrks");
+            winTrigger.enabled = true;
         }
     }
 
