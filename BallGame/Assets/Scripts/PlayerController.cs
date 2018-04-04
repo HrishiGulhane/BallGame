@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-
 // Include the namespace required to use Unity UI
 using UnityEngine.UI;
 using UnityEngine.Playables;
-
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -66,21 +64,10 @@ public class PlayerController : MonoBehaviour {
 	// store a reference to that collider in a variable named 'other'..
 	void OnTriggerEnter(Collider other) 
 	{
-		// ..and if the game object we intersect has the tag 'Pick Up' assigned to it..
-		if (other.gameObject.CompareTag ("Pick Up"))
-		{
-			// Make the other game object (the pick up) inactive, to make it disappear
-			other.gameObject.SetActive (false);
-
-			// Add one to the score variable 'count'
-			count = count + 1;
-
-			// Run the 'SetCountText()' function (see below)
-			SetCountText ();
-		}
-        else if (other.gameObject.tag == "Reset")
+		
+        if (other.gameObject.tag == "Reset" || other.gameObject.CompareTag("Pick Up"))
         {
-            ResetBoxes();
+            
             rb.velocity=Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             print("raawas");
@@ -93,6 +80,10 @@ public class PlayerController : MonoBehaviour {
         {
             print("triggerwotrks");
             timeline.Play();
+        }
+        else if(other.gameObject.tag=="Win")
+        {
+            winText.text = "You Win!";
         }
     }
 
@@ -137,19 +128,12 @@ public class PlayerController : MonoBehaviour {
     public void MovementJump()
     {
         print("Jump");
-        rb.AddForce(Vector3.up * 400);
+        rb.AddForce(Vector3.up * 300);
 
     }
 
-    public void ResetBoxes()
-    {
-        /*GameObject[] boxes = GameObject.FindGameObjectsWithTag("Pick Up");
-        foreach (GameObject go in boxes)
-        {
-            go.SetActive(true);
-        }*/
-       
 
-    }
+
+
 
 }
