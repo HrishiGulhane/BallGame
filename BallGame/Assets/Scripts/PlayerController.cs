@@ -74,7 +74,8 @@ public class PlayerController : MonoBehaviour {
             gameObject.transform.position = originalPos;
             count = 0;
             SetCountText();
-            
+            timeline.Stop();
+
         }
         else if(other.gameObject.tag=="WinTrigger")
         {

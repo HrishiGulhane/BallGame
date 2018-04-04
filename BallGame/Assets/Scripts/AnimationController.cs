@@ -7,6 +7,7 @@ public class AnimationController : MonoBehaviour {
 
     public Animator optionsMenu;
     public Animator mainMenu;
+    public Animator aboutMenu;
 
     public void playAnimation()
     {
@@ -27,5 +28,16 @@ public class AnimationController : MonoBehaviour {
     {
         
         mainMenu.Play("menu");
+    }
+
+    public void AboutMenu()
+    {
+        aboutMenu.SetTrigger("rev");
+    }
+
+    public void AboutMenuRev()
+    {
+
+        aboutMenu.Play("about");
     }
 }
