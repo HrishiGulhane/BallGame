@@ -12,6 +12,17 @@ public class PlayerController : MonoBehaviour {
 	public Text winText;
     Vector3 originalPos;
     public PlayableDirector timeline;
+    public AudioSource playerAudio;
+    public AudioClip impactSound;
+    public AudioClip triumphsound;
+    public AudioClip backgroundAudio;
+    public AudioClip bounce;
+    public AudioClip pauseSound;
+    public AudioClip winSound;
+
+    public GameObject winCanvas;
+
+
     
    
  
@@ -24,13 +35,13 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         originalPos = gameObject.transform.position;
-        
+        winCanvas.SetActive(false);
     }
 
     // At the start of the game..
     void Start ()
 	{
-        
+        BackgroundAudio();
 		// Assign the Rigidbody component to our private rb variable
 		rb = GetComponent<Rigidbody>();
 
@@ -73,13 +84,15 @@ public class PlayerController : MonoBehaviour {
             rb.angularVelocity = Vector3.zero;
             print("raawas");
             gameObject.transform.position = originalPos;
-            
-            
+            StopTriumph();
+            PlayImpact();
             timeline.Stop();
+            Start();
 
         }
         else if(other.gameObject.tag=="WinTrigger")
         {
+            playTriumph();
             print("triggerwotrks");
             timeline.Play();
         }
@@ -87,8 +100,28 @@ public class PlayerController : MonoBehaviour {
         {
             print("daalbhaat");
             //winText.gameObject.SetActive(true);
-            winText.text = "You Win!";
+            //winText.text = "";
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            winCanvas.SetActive(true);
+            playerAudio.PlayOneShot(winSound, 0.5f);
+
         }
+        else if(other.gameObject.tag == "bounce")
+        {
+            if (rb.velocity.y < 0.01)
+            {
+                print(Mathf.Abs(rb.velocity.y));
+                float intensity = (Mathf.Abs(rb.velocity.y) * 0.1f);
+                playerAudio.PlayOneShot(bounce,intensity);
+            }
+            else
+            {
+
+            }
+        }
+       
     }
 
 	/*// Create a standalone function that can update the 'countText' UI and check if the required amount to win has been achieved
@@ -136,8 +169,28 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    public void PlayImpact()
+    {
+        playerAudio.PlayOneShot(impactSound);
+    }
 
+    public void playTriumph()
+    {
+        playerAudio.PlayOneShot(triumphsound);
+    }
+    public void StopTriumph()
+    {
+        playerAudio.Stop();
+    }
 
+    public void BackgroundAudio()
+    {
+        playerAudio.PlayOneShot(backgroundAudio,0.15f);
+    }
 
+    public void PlayPauseSound()
+    {
+        playerAudio.PlayOneShot(pauseSound,0.2f);
+    }
 
 }
