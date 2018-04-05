@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     public AudioSource playerAudio;
     public AudioClip impactSound;
     public AudioClip triumphsound;
+    private bool hasPlayedTriumph;
     public AudioClip backgroundAudio;
     public AudioClip bounce;
     public AudioClip pauseSound;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
     // At the start of the game..
     void Start ()
 	{
+        hasPlayedTriumph = false;
         BackgroundAudio();
 		// Assign the Rigidbody component to our private rb variable
 		rb = GetComponent<Rigidbody>();
@@ -92,9 +94,14 @@ public class PlayerController : MonoBehaviour {
         }
         else if(other.gameObject.tag=="WinTrigger")
         {
-            playTriumph();
-            print("triggerwotrks");
-            timeline.Play();
+            if (hasPlayedTriumph == false)
+            {
+                playTriumph();
+                print("triggerwotrks");
+                timeline.Play();
+                hasPlayedTriumph = true;
+            }
+            
         }
         else if(other.gameObject.tag=="Win")
         {
@@ -105,21 +112,19 @@ public class PlayerController : MonoBehaviour {
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
             winCanvas.SetActive(true);
+            playerAudio.Stop();
             playerAudio.PlayOneShot(winSound, 0.5f);
 
         }
         else if(other.gameObject.tag == "bounce")
         {
-            if (rb.velocity.y < 0.01)
-            {
-                print(Mathf.Abs(rb.velocity.y));
-                float intensity = (Mathf.Abs(rb.velocity.y) * 0.1f);
-                playerAudio.PlayOneShot(bounce,intensity);
-            }
-            else
-            {
-
-            }
+           if (rb.velocity.y < 0.001)
+                {
+                    print(Mathf.Abs(rb.velocity.magnitude));
+                    float intensity = (Mathf.Abs(rb.velocity.magnitude) * 0.1f);
+                    playerAudio.PlayOneShot(bounce,intensity);
+                }
+          
         }
        
     }
@@ -190,7 +195,7 @@ public class PlayerController : MonoBehaviour {
 
     public void PlayPauseSound()
     {
-        playerAudio.PlayOneShot(pauseSound,0.2f);
+        playerAudio.PlayOneShot(pauseSound,0.15f);
     }
 
 }
