@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour {
 		
 
 		// Set the text property of our Win Text UI to an empty string, making the 'You Win' (game over message) blank
-		winText.gameObject.SetActive(false);
+		//winText.gameObject.SetActive(false);
+        winText.text = "";
 	}
 
 	// Each physics step..
@@ -84,7 +85,8 @@ public class PlayerController : MonoBehaviour {
         }
         else if(other.gameObject.tag=="Win")
         {
-            winText.gameObject.SetActive(true);
+            print("daalbhaat");
+            //winText.gameObject.SetActive(true);
             winText.text = "You Win!";
         }
     }
