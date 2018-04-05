@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
     public AudioClip winSound;
 
     public GameObject winCanvas;
+    public GameObject pauseCanvas;
+    public GameObject gameUIcanvas;
 
 
     
@@ -37,6 +39,8 @@ public class PlayerController : MonoBehaviour {
     {
         originalPos = gameObject.transform.position;
         winCanvas.SetActive(false);
+        gameUIcanvas.SetActive(true);
+        pauseCanvas.SetActive(true);
     }
 
     // At the start of the game..
@@ -114,6 +118,8 @@ public class PlayerController : MonoBehaviour {
             winCanvas.SetActive(true);
             playerAudio.Stop();
             playerAudio.PlayOneShot(winSound, 0.5f);
+            gameUIcanvas.SetActive(false);
+            pauseCanvas.SetActive(false);
 
         }
         else if(other.gameObject.tag == "bounce")
